@@ -29,29 +29,32 @@ const modalText = document.querySelector("[data-modal-text]");
 
 // modal toggle function
 const teammembersModalFunc = function () {
+  if (!modalContainer || !overlay) return;
   modalContainer.classList.toggle("active");
   overlay.classList.toggle("active");
 }
 
 // add click event to all modal items
-for (let i = 0; i < teammembersItem.length; i++) {
+if (teammembersItem.length && modalImg && modalTitle && modalText) {
+  for (let i = 0; i < teammembersItem.length; i++) {
 
-  teammembersItem[i].addEventListener("click", function () {
+    teammembersItem[i].addEventListener("click", function () {
 
-    modalImg.src = this.querySelector("[data-teammembers-avatar]").src;
-    modalImg.alt = this.querySelector("[data-teammembers-avatar]").alt;
-    modalTitle.innerHTML = this.querySelector("[data-teammembers-title]").innerHTML;
-    modalText.innerHTML = this.querySelector("[data-teammembers-text]").innerHTML;
+      modalImg.src = this.querySelector("[data-teammembers-avatar]").src;
+      modalImg.alt = this.querySelector("[data-teammembers-avatar]").alt;
+      modalTitle.innerHTML = this.querySelector("[data-teammembers-title]").innerHTML;
+      modalText.innerHTML = this.querySelector("[data-teammembers-text]").innerHTML;
 
-    teammembersModalFunc();
+      teammembersModalFunc();
 
-  });
+    });
 
+  }
 }
 
 // add click event to modal close button
-modalCloseBtn.addEventListener("click", teammembersModalFunc);
-overlay.addEventListener("click", teammembersModalFunc);
+if (modalCloseBtn) modalCloseBtn.addEventListener("click", teammembersModalFunc);
+if (overlay) overlay.addEventListener("click", teammembersModalFunc);
 
 
 
